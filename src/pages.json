@@ -1,0 +1,29 @@
+{
+    "globalStyle": {
+        "backgroundColor": "#F8F8F8",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "navigationBarTitleText": "repairman",
+        "navigationBarTextStyle": "black"
+    },
+    "pages": [
+        { "path": "pages/index/index", "style": { "titleNView": false } },
+        { "path": "pages/index/mine", "style": { "titleNView": false } },
+        { "path": "pages/index/apply", "style": { "titleNView": false } },
+        { "path": "pages/index/fixOrder", "style": { "titleNView": false } },
+        { "path": "pages/index/myFix", "style": { "titleNView": false } }
+    ],
+    "easycom": { "autoscan": false, "custom": { "atom-(.*)": "@/atom/$1.vue", "mx-(.*)": "@chinapnr/matrix-uni/lib/$1/index.vue" } },
+    "tabBar": {
+        "backgroundColor": "#ffffff",
+        "spacing": "3",
+        "color": "#0d0d0d",
+        "iconWidth": "24",
+        "fontSize": "12",
+        "selectedColor": "#409EFF",
+        "borderStyle": "black",
+        "list": [
+            { "text": "首页", "pagePath": "pages/index/index" },
+            { "text": "我的", "pagePath": "pages/index/mine" }
+        ]
+    }
+}
