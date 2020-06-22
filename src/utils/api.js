@@ -89,7 +89,7 @@ export default {
         }
     },
     //登录
-    async login(params){
-        return await this.apiCall('post','/login',params);
+    async login(params) {
+        return await this.apiCall('post', '/login', params);
     }
 };
