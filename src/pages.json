@@ -10,7 +10,8 @@
         { "path": "pages/index/mine", "style": { "titleNView": false } },
         { "path": "pages/index/apply", "style": { "titleNView": false } },
         { "path": "pages/index/fixOrder", "style": { "titleNView": false } },
-        { "path": "pages/index/myFix", "style": { "titleNView": false } }
+        { "path": "pages/index/myFix", "style": { "titleNView": false } },
+        { "path": "pages/index/register", "style": { "titleNView": false } }
     ],
     "easycom": { "autoscan": false, "custom": { "atom-(.*)": "@/atom/$1.vue", "mx-(.*)": "@chinapnr/matrix-uni/lib/$1/index.vue" } },
     "tabBar": {

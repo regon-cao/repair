@@ -199,9 +199,19 @@ export default {
     props: {},
     methods: {
         toApply(type) {
+            if (!this.checkRole()) {
+                return uni.navigateTo({
+                    url: '/pages/index/register'
+                });
+            }
             uni.navigateTo({
                 url: '/pages/index/apply?type=' + type
             });
+        },
+        //校验是否填了角色
+        checkRole() {
+            if (getApp().globalData.userInfo.role) return true;
+            return false;
         }
     }
 };

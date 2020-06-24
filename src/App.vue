@@ -1,5 +1,5 @@
 <script>
-//import ajax from './utils/api';
+import ajax, { setOpenid } from './utils/api';
 export default {
     onLaunch: function() {
         console.log('App Launch');
@@ -12,11 +12,16 @@ export default {
             success: async function(loginRes) {
                 console.log(loginRes.code);
                 let data = {};
-                // let res = await ajax.login(data);
+                let res = await ajax.login(data);
+                await setOpenid(res.openid);
+                //获取用户信息
+                let userInfo = await ajax.getUserInfo({ userId: res.openid });
             }
         });
     },
-    globalData: {},
+    globalData: {
+        userInfo: {}
+    },
     onHide: function() {
         console.log('App Hide');
     }

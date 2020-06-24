@@ -1,6 +1,10 @@
 import qs from 'qs';
 // 默认的请求接口域名如：https://project-test.com/api
 let BASEURI = '';
+let openid = '';
+export const setOpenid = id => {
+    openid = id;
+};
 export default {
     // VUE_APP_API_HOST可在.env.development或.env.production中配置，可用于判断项目运行环境
     BASEURIDEV: process.env.VUE_APP_API_HOST || BASEURI, //开发环境
@@ -8,21 +12,6 @@ export default {
     es: {
         searchList: 'search'
     },
-    /**
-     * 具体的接口名称
-     * 业务逻辑相关接口分类
-     */
-    // 订单
-    order: {
-        // 获取会员信息
-        getOrderDetail: 'orderDetail'
-    },
-    // 商品列表类
-    goodsList: {
-        // 获取会员信息
-        getGoodsList: 'queryGoodsList'
-    },
-
     /**
      * 封装请求（async await 封装uni.request）
      * method post/get
@@ -44,7 +33,8 @@ export default {
             const requestObj = {
                 method,
                 header: {
-                    'content-type': contentType
+                    'content-type': contentType,
+                    'openid': openid
                 }
             };
             // 根据不同的环境请求不同的接口域名
@@ -91,5 +81,13 @@ export default {
     //登录
     async login(params) {
         return await this.apiCall('post', '/login', params);
+    },
+    //获取用户信息
+    async getUserInfo(params) {
+        return await this.apiCall('post', '/getUserInfo', params);
+    },
+    //注册
+    async register(params) {
+        return await this.apiCall('post', '/register', params);
     }
 };
