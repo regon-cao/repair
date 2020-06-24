@@ -1,5 +1,5 @@
 <script>
-import ajax, { setOpenid } from './utils/api';
+import ajax from './utils/api';
 export default {
     onLaunch: function() {
         console.log('App Launch');
@@ -13,7 +13,8 @@ export default {
                 console.log(loginRes.code);
                 let data = {};
                 let res = await ajax.login(data);
-                await setOpenid(res.openid);
+                await ajax.setOpenid(res.openid);
+                this.globalData.userInfo.openid = res.openid;
                 //获取用户信息
                 let userInfo = await ajax.getUserInfo({ userId: res.openid });
             }

@@ -6,14 +6,14 @@
             </mx-field>
             <mx-field>
                 <mx-label text="手机号" />
-                <mx-input type="text" v-model="phoneNumber" />
+                <mx-input type="number" v-model="phoneNumber" confirm-type="done" />
             </mx-field>
         </mx-form>
         <mx-button type="primary" value="提 交" block ext-class="form-submit" class="apply" open-type="getUserInfo" @getuserinfo="getUserInfo" />
     </view>
 </template>
 <script>
-import { register } from '../../utils/api.js';
+import ajax from '../../utils/api.js';
 export default {
     data() {
         return {
@@ -56,9 +56,10 @@ export default {
                 nickName: e.detail.nickName,
                 avataUrl: e.detail.avataUrl,
                 phoneNumber: this.phoneNumber,
-                role: this.role
+                role: this.role,
+                openid: getApp().globalData.userInfo.openid
             };
-            res = await register(data);
+            res = await ajax.register(data);
         },
         PickerChange(e) {
             console.log(e);
