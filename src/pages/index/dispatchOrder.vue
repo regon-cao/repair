@@ -1,6 +1,6 @@
 <template>
     <view class="">
-        <view class="imageContentWrap" v-for="item in list">
+        <view class="imageContentWrap" v-for="item in list" @click="dispatch(item)" v-if="item.status == 0" :key="item.order_id">
             <view class="contentWrap">
                 <view class="tagTxtWrap">
                     <view>维修内容：</view>
@@ -10,25 +10,18 @@
                     <view>维修位置：</view>
                     <view class="tagTxt">{{ item.location }}</view>
                 </view>
-                <view class="tagTxtWrap" v-if="item.status == 3">
-                    <view>维修人员：</view>
-                    <view class="tagTxt">{{ item.repair_user_info.name }}</view>
-                </view>
-                <view class="tagTxtWrap" v-if="item.status == 3">
-                    <view>维修时间：</view>
-                    <view class="tagTxt">{{ item.complete_time }}</view>
-                </view>
-                <view class="tagTxtWrap" v-if="item.status == 3">
-                    <view>联系电话：</view>
-                    <view class="imPrice">{{ item.repair_user_info.mobile }}</view>
+                <view class="tagTxtWrap">
+                    <view>报修人员：</view>
+                    <view class="tagTxt">{{ item.report_user_info.name }}</view>
                 </view>
                 <view class="tagTxtWrap">
-                    <view>维修状态：</view>
-                    <view class="imPrice status">{{ item.statusDesc }}</view>
+                    <view>报修时间：</view>
+                    <view class="tagTxt">{{ item.create_time }}</view>
                 </view>
-                <view class="tagTxtWrap" v-if="item.status == 4 && item.remark">
-                    <view>维修备注：</view>
-                    <view class="imPrice status">{{ item.remark }}</view>
+                <view class="tagTxtWrap">
+                    <view>联系电话：</view>
+                    <view class="imPrice">{{ item.report_user_info.mobile }}</view>
+                    <view class="btn">派发</view>
                 </view>
             </view>
         </view>
@@ -52,15 +45,15 @@ export default {
     },
     props: {},
     methods: {
-        avatar_text2_0_0() {
+        dispatch(item) {
             uni.navigateTo({
-                url: '/pages/index/apply'
+                url: '/pages/index/delivery?orderId=' + item.order_id
             });
         },
         async getList() {
             let data = {
                 open_id: getApp().globalData.userInfo.openid,
-                type: 1,
+                type: 2,
                 page_index: 1,
                 page_size: 100
             };
@@ -69,8 +62,7 @@ export default {
             this.list = this.list.map(item => {
                 item.create_time = formatTime(item.create_time);
                 item.statusDesc = handleStatus(item.status);
-                item.handler_time = formatTime(item.handler_time);
-                item.complete_time = formatTime(item.complete_time);
+                item.handler_time = handleStatus(item.handler_time);
                 return item;
             });
         }
@@ -143,6 +135,7 @@ export default {
             display: flex;
             margin-bottom: 8rpx;
             align-items: center;
+            position: relative;
             .tagTxt {
                 display: inline-block;
                 padding: 6rpx 8rpx;
@@ -163,6 +156,17 @@ export default {
                 font-weight: 600;
                 font-size: 28rpx;
             }
+        }
+        .btn {
+            color: #0d6eff;
+            height: 50rpx;
+            line-height: 50rpx;
+            padding: 0 20rpx;
+            border: 1px solid #0d6eff;
+            border-radius: 16rpx;
+            position: absolute;
+            right: 0;
+            top: 0;
         }
     }
 }

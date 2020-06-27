@@ -6,17 +6,21 @@ export default {
     },
     onShow: function() {
         console.log('App Show');
-        //获取用户信息
+        //获取code
         wx.login({
             provider: 'weixin',
             success: async function(loginRes) {
-                console.log(loginRes.code);
-                let data = {};
-                let res = await ajax.login(data);
-                await ajax.setOpenid(res.openid);
-                this.globalData.userInfo.openid = res.openid;
+                let data = { code: loginRes.code };
+                let res = await ajax.check(data);
+                //  await ajax.setOpenid(res.data.open_id);
+                let App = getApp();
+                App.globalData.userInfo.openid = res.data.open_id;
+                App.globalData.userInfo.type = res.data.type;
                 //获取用户信息
-                let userInfo = await ajax.getUserInfo({ userId: res.openid });
+                if (App.globalData.userInfo.type != '0') {
+                    let d = await ajax.login({ openId: res.data.open_id });
+                    App.globalData.userInfo = { ...App.globalData.userInfo, ...d.data };
+                }
             }
         });
     },

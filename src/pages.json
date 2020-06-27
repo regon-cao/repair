@@ -6,12 +6,15 @@
         "navigationBarTextStyle": "black"
     },
     "pages": [
-        { "path": "pages/index/index", "style": { "titleNView": false } },
-        { "path": "pages/index/mine", "style": { "titleNView": false } },
-        { "path": "pages/index/apply", "style": { "titleNView": false } },
-        { "path": "pages/index/fixOrder", "style": { "titleNView": false } },
-        { "path": "pages/index/myFix", "style": { "titleNView": false } },
-        { "path": "pages/index/register", "style": { "titleNView": false } }
+        { "path": "pages/index/index", "style": { "titleNView": false, "navigationBarTitleText": "锐派尔" } },
+        { "path": "pages/index/mine", "style": { "titleNView": false, "navigationBarTitleText": "个人中心" } },
+        { "path": "pages/index/apply", "style": { "titleNView": false, "navigationBarTitleText": "申请维修" } },
+        { "path": "pages/index/fixOrder", "style": { "titleNView": false, "navigationBarTitleText": "我的维修" } },
+        { "path": "pages/index/myFix", "style": { "titleNView": false, "navigationBarTitleText": "我的报修" } },
+        { "path": "pages/index/register", "style": { "titleNView": false, "navigationBarTitleText": "注册" } },
+        { "path": "pages/index/dispatchOrder", "style": { "titleNView": false, "navigationBarTitleText": "派发维修" } },
+        { "path": "pages/index/delivery", "style": { "titleNView": false, "navigationBarTitleText": "指派维修" } },
+        { "path": "pages/index/confirmOrder", "style": { "titleNView": false, "navigationBarTitleText": "确认维修" } }
     ],
     "easycom": { "autoscan": false, "custom": { "atom-(.*)": "@/atom/$1.vue", "mx-(.*)": "@chinapnr/matrix-uni/lib/$1/index.vue" } },
     "tabBar": {

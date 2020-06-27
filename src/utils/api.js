@@ -23,7 +23,7 @@ export default {
     async apiCall(method, api, params, { contentType = '', restful = false } = {}) {
         try {
             if (method === 'post') {
-                contentType = 'application/x-www-form-urlencoded';
+                contentType = 'application/json';
             }
 
             if (!contentType) {
@@ -78,16 +78,44 @@ export default {
             return;
         }
     },
-    //登录
-    async login(params) {
-        return await this.apiCall('post', '/login', params);
+    //获取openid
+    async check(params) {
+        return await this.apiCall('get', '/app/user/check', params);
     },
-    //获取用户信息
-    async getUserInfo(params) {
-        return await this.apiCall('post', '/getUserInfo', params);
+    //login
+    async login(params) {
+        return await this.apiCall('post', '/app/user/login', params);
     },
     //注册
     async register(params) {
-        return await this.apiCall('post', '/register', params);
+        return await this.apiCall('post', '/app/user/register', params);
+    },
+    //报修申请
+    async submitOrder(params) {
+        return await this.apiCall('post', '/app/order/submit', params);
+    },
+    //订单列表查询
+    async getOrderList(params) {
+        return await this.apiCall('get', '/app/order/list', params);
+    },
+    //待维修列表查询
+    async getPendList(params) {
+        return await this.apiCall('get', '/app/order/pending/list', params);
+    },
+    //派发订单
+    async delivery(params) {
+        return await this.apiCall('post', '/app/order/delivery', params);
+    },
+    //获取维修人员列表
+    async getRepair(params) {
+        return await this.apiCall('get', '/app/user/repairUserList', params);
+    },
+    //维修人员确认
+    async repairConfirm(params) {
+        return await this.apiCall('post', '/app/order/confirm', params);
+    },
+    //维修人员点击完成
+    async repairComplete(params) {
+        return await this.apiCall('post', '/app/order/complete', params);
     }
 };
